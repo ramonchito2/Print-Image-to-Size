@@ -12,8 +12,11 @@
 	<?php
 	$width = isset( $_REQUEST['width'] );
 	$height = isset( $_REQUEST['height'] );
+	$terr = isset( $_REQUEST['map']);
 	if( $width && $height ) { // Show Print Layout
 		include( 'printlayout.php ');
+	} elseif( $terr ) {
+		include('printmap.php');
 	} else { // Show Home Page
 		?>
 
