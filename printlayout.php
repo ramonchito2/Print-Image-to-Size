@@ -87,38 +87,14 @@ if( isset($_REQUEST['otm']) ):
 			}
 			<?php endif; ?>
 		</style>
-	<?php endif;
-	// Get all images from imgs folder
-	if ( $handle = opendir('imgs') ): // Get all images from 'imgs' folder
-
-	    while (false !== ($entry = readdir($handle))) {
-	        $files[] = $entry;
-	    }
-	    $images=preg_grep('/\.(jpg|jpeg|png|gif)(?:[\?\#].*)?$/i', $files);
-
-	    if( $images ):
-		    foreach($images as $image) { // Output every image onto a single page
-		    	?>
-				<div class="page-body">
-					<div class="page-container">
-						<div class="page-inner"><img src="imgs/<?= $image; ?>" width="100%" height="auto"></div>
-						<span>01</span>
-					</div>
-				</div>
-		    	<?php
-		    }   	
-	    else:
-	    	?>
-	    	<div class="noImages">
-	    		<h2>You have no images</h2>
-	    		<p>Try adding images to the 'imgs' folder and try again</p>
-	    		<a href="/?width=<?= $width; ?>&height=<?= $height; ?>&dwidth=<?= $dwidth; ?>&dheight=<?= $dheight; ?>">Try Again</a>
-	    	</div>
-	    	<?php
-	    endif;
-	    closedir($handle);
-	endif;
-endif; ?>
+	<?php endif; ?>
+	<div class="page-body">
+		<div class="page-container">
+			<div class="page-inner"></div>
+			<span>Feature Currently Disabled</span>
+		</div>
+	</div>
+<?php endif; ?>
 
 <div class="menupanel">
 	<div class="menucontainer">
