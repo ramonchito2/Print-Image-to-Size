@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	// Homepage form switch
 	$("#myonoffswitch").change(function() {
 	    if(this.checked) {
 	        $('#cpl').addClass('show');
@@ -9,6 +10,7 @@ $(document).ready(function(){
 
 	    }
 	});
+	// Page Layout menu button, slideout and options
 	$('.menu').click(function(){
 	    $('.menupanel').addClass('open');
 	})
@@ -33,4 +35,13 @@ $(document).ready(function(){
 	    	}
 	    }
 	})
+	// Invalid page size message
+	if( typeof invalidsize !== 'undefined' ) {
+		$('body').prepend('<div class="invalid">'+invalidsize+'</div>');
+		$('.invalid').css('opacity');
+		$('.invalid').addClass('enter');
+		setTimeout(function(){
+			$('.invalid').removeClass('enter');
+		},5000);
+	}
 })

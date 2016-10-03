@@ -11,10 +11,10 @@
 	<script src="script.js"></script>
 </head>
 <?php
-$psize  = isset( $_REQUEST['psize'] );
-$csize  = isset( $_REQUEST['csize'] );
+$psize  = isset( $_REQUEST['psize'] ) ? $_REQUEST['psize'] : 0;
+$csize  = isset( $_REQUEST['csize'] ) ? $_REQUEST['csize'] : 0;
 $otm    = isset( $_REQUEST['otm']);
-$bstyle = $psize || $otm ? ' class="printlayout"' : null;
+$bstyle = ($psize || $csize || $otm) ? $otm ? ' class="printlayout otm"' : ' class="printlayout cpl"' : null;
 ?>
 <body<?= $bstyle; ?>>
 <?php
@@ -29,28 +29,28 @@ $bstyle = $psize || $otm ? ' class="printlayout"' : null;
 					<input id="psize" type="text" name="psize" placeholder="8.5 x 11" list="papersize" />
 					<label for="psize" style="margin-bottom:40px;">Paper Size</label>
 					<datalist name="papersize" id="papersize">
-						<option value="Executive">Executive<span>(7 x 10)</option>
-						<option value="Folio">Folio<span>8 x 13</span></option>
-						<option value="Index">Index<span>5 x 8</span></option>
-						<option value="Ledger">Ledger<span>(11 x 17)</span></option>
-						<option value="Legal">Legal<span>(8 1/2 x 14)</span></option>
-						<option value="Letter" selected="selected">Letter<span>(8 1/2 x 11)</span></option>
-						<option value="Photo">Photo<span>(4 x 6)</span></option>
-						<option value="Half">Half<span>(5 1/2 x 8 1/2)</span></option>
-						<option value="Tabloid">Tabloid<span>(11 x 17)</span></option>
+						<option value="7 x 10">Executive</option>
+						<option value="8 x 13">Folio</option>
+						<option value="5 x 8">Index</option>
+						<option value="11 x 17">Ledger</option>
+						<option value="8 1/2 x 14">Legal</option>
+						<option value="8 1/2 x 11" selected="selected">Letter</option>
+						<option value="4 x 6">Photo</option>
+						<option value="5 1/2 x 8 1/2">Half</option>
+						<option value="11 x 17">Tabloid</option>
 					</datalist>
 					<input id="csize" type="text" name="csize" placeholder="8 x 10" list="customsize" />
 					<label for="csize">Desired Size</label>
 					<datalist name="customsize" id="customsize">
-						<option value="Executive">Executive<span>(7 x 10)</option>
-						<option value="Folio">Folio<span>8 x 13</span></option>
-						<option value="Index">Index<span>5 x 8</span></option>
-						<option value="Ledger">Ledger<span>(11 x 17)</span></option>
-						<option value="Legal">Legal<span>(8 1/2 x 14)</span></option>
-						<option value="Letter" selected="selected">Letter<span>(8 1/2 x 11)</span></option>
-						<option value="Photo">Photo<span>(4 x 6)</span></option>
-						<option value="Half">Half<span>(5 1/2 x 8 1/2)</span></option>
-						<option value="Tabloid">Tabloid<span>(11 x 17)</span></option>
+						<option value="7 x 10">Executive</option>
+						<option value="8 x 13">Folio</option>
+						<option value="5 x 8">Index</option>
+						<option value="11 x 17">Ledger</option>
+						<option value="8 1/2 x 14">Legal</option>
+						<option value="8 1/2 x 11" selected="selected">Letter</option>
+						<option value="4 x 6">Photo</option>
+						<option value="5 1/2 x 8 1/2">Half</option>
+						<option value="11 x 17">Tabloid</option>
 					</datalist>
 					<input type="submit" value="Create Print Layout" />
 				</form>
