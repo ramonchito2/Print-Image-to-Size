@@ -255,6 +255,15 @@ body.otm .page-container {
     text-align: center;
 }
 
+.campaign-msg {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 2em;
+    opacity: 1;
+    transition: 0.3s ease;
+}
+
 body .page-body.mapcard:nth-child(odd) .page-container {
     height: 9.35in;
 }
@@ -333,6 +342,17 @@ a.menu:after {
 
 .menupanel.open .menucontainer {
     transform: translate3d(0,0,0);
+}
+
+input#campaigntext {
+    padding: 6px;
+    margin-top: 10px;
+    width: 100%;
+    display: none;
+}
+
+#campaign:checked ~ input#campaigntext {
+    display: block;
 }
 
 a.startover {
@@ -422,15 +442,16 @@ body.otm a.startover:hover {
 
 @media print {
     body {
-        margin: 0;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     .page-body {
         margin-bottom: 0px;
         box-shadow: none;
         background: white;
     }
-    .mapcard .page-container {
-        height: 9.4in;
+    body.otm .mapcard .page-container {
+        height: 9.4in !important;
     }
     .page-container > span {
         display: none;
@@ -438,5 +459,11 @@ body.otm a.startover:hover {
     a.menu {
         opacity: 0;
         display: none;  
+    }
+    .campaign-msg {
+        font-size: 2.4em;
+        padding-top: 0;
+        position: relative;
+        top: -10px;
     }
 }

@@ -27,14 +27,25 @@ $(document).ready(function(){
 	        } else {
 	        	$('.page-container').removeClass('noborder');
 	        }
-	    } else {
+	    } else if( $(this).attr('name') == 'pagenums' ) {
 	    	if( $(this).prop("checked") ){
 	    		$('.page-container > span').addClass('hide');
 	    	} else {
 	    		$('.page-container > span').removeClass('hide');
 	    	}
+	    } else if( $(this).attr('name') == 'campaign' ) {
+	    	if( !$(this).prop("checked") ){
+	    		$('.campaign-msg').addClass('hide');
+	    	} else {
+	    		$('.campaign-msg').removeClass('hide');
+	    	}
 	    }
 	})
+	// Add Campaign Text
+	$('#campaigntext').keyup(function(event) {
+		msg = event.target.value;
+		$('.campaign-msg').text(msg);
+	});
 	// Invalid page size message
 	if( typeof invalidsize !== 'undefined' ) {
 		$('body').prepend('<div class="invalid">'+invalidsize+'</div>');
@@ -44,4 +55,5 @@ $(document).ready(function(){
 			$('.invalid').removeClass('enter');
 		},5000);
 	}
+
 })

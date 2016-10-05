@@ -7,19 +7,20 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Custom Print Layout</title>
 	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="script.js"></script>
 </head>
 <?php
-$psize  = isset( $_REQUEST['psize'] ) ? $_REQUEST['psize'] : 0;
-$csize  = isset( $_REQUEST['csize'] ) ? $_REQUEST['csize'] : 0;
+$psize  = isset( $_REQUEST['psize'] );
+$csize  = isset( $_REQUEST['csize'] );
 $otm    = isset( $_REQUEST['otm']);
 $bstyle = ($psize || $csize || $otm) ? $otm ? ' class="printlayout otm"' : ' class="printlayout cpl"' : null;
 ?>
 <body<?= $bstyle; ?>>
 <?php
 	if( $psize || $csize || $otm): // Show Print Layout
-		include( 'printlayout.php ');
+		include( 'printlayout.php');
 	else: ?>
 
 		<section class="homeContainer">

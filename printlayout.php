@@ -3,7 +3,7 @@ if( isset($_REQUEST['otm']) ): // OTM Print Layout
 	/**
 	Currently ids have to be manually copied form OTM
 	IDs dynamically change when territory is re-checkedout
-	Easy JS way to get all ids of terrs
+	Easy JS way to get all ids of terrs (won't work as bookmarklet)
 	copy and run following script in a browser's Dev Tools
 	(make sure to turn admin options on and order by name)
 	---
@@ -14,12 +14,19 @@ if( isset($_REQUEST['otm']) ): // OTM Print Layout
 	    id = link.match(/MyTerID=([0-9]*)&/)[1];
 	    ids.push(id);
 	})
-	copy(ids) // actually copies var into clipboard
+	$('body').append('<div class="idscopied">IDs Copied!</div><style>.idscopied{position:fixed;top:45%;left:50%;z-index:99999999;background:rgba(27, 134, 27, 0.94);border:1px solid green;font-size:1.8em;color:white;padding:3px 24px;border-radius:4px;opacity:0;transform:translate(-50%,-50%);transition:all .3s ease}.idscopied.enter{top:50%;opacity:1}</style>');
+	// Autosave message
+	$('.idscopied').css('opacity');
+	$('.idscopied').addClass('enter');
+	setTimeout(function(){
+		$('.idscopied').removeClass('enter');
+	},2000 );
+	copy(ids); // actually copies var into clipboard
 	---
 	*/
 	// All terr IDs from OTM
 	$ids = [
-	  "463118","487313","461914","487314","461851","487315","510415","488403","488395","488396","488397","488398","487317","488402","487318","461916","487319","473800","473801","473802","422066","393934","445071","454071","488400","463119","473803","488399","488404","487320","473806","445373","422072","380885","461888","454076","461876","473807","380914","473808","393941","454073","393942","463120","461922","488401","415549","454074","461920","373111","454075","473809","473810","463116","461918","473811","415550","463117"
+	"512372","512373","512374","512375","512376","512377","512378","512379","512380","512381","512382","512383","512384","512385","512386","512387","512388","512389","512390","512391","512392","512393","512394","512395","512396","512397","512398","512399","512400","512401","512402","512403","512404","512405","512406","512407","512408","512409","512410","512411","512412","512413","512414","512415","512416","512417","512418","512419","512420","512421","512422","512423","512424","512425","512426","512427","512428","512429"
 	];
 	// Remove '0' key from array. Needed for foreach loop logic
 	array_unshift($ids,"");
@@ -50,6 +57,7 @@ if( isset($_REQUEST['otm']) ): // OTM Print Layout
 						<iframe id="doc<?= $num; ?>" src="<?= $addLink; ?>" width="100%" height="100%" frameborder="0"></iframe>
 					</div>
 					<span><?= sprintf("%02d", $pg);$pg++;?></span>
+					<div class="campaign-msg"></div>
 				</div>
 			</div>
 			<div class="page-body mapcard">
@@ -72,6 +80,8 @@ if( isset($_REQUEST['otm']) ): // OTM Print Layout
 	<?php endif;
 
 else: // Custom Print Layout
+	$psize = $_REQUEST['psize'];
+	$csize = $_REQUEST['csize'];
 	if( $psize || $csize ):
 		$width;
 		$height;
@@ -160,7 +170,10 @@ else: // Custom Print Layout
 		<input type="checkbox" name="borders" id="borders">
 		<label for="borders">Hide Borders</label><br>
 		<input type="checkbox" name="pagenums" id="pagenums">
-		<label for="pagenums">Hide Page Numbers</label>
+		<label for="pagenums">Hide Page Numbers</label><br>
+		<input type="checkbox" name="campaign" id="campaign">
+		<label for="campaign">Add Campaign Label?</label><br>
+		<input id="campaigntext" type="text" placeholder="Campana Enero 2016">
 		<a href="." class="startover">Start Over</a>
 	</div>
 </div>
