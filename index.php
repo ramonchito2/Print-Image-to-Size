@@ -9,7 +9,8 @@
 	<link rel="stylesheet" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script src="script.js"></script>
+	<script src="./scripts/dropzone.js"></script>
+	<script src="./scripts/script.js"></script>
 </head>
 <?php
 $psize  = isset( $_REQUEST['psize'] );
@@ -26,7 +27,7 @@ $bstyle = ($psize || $csize || $otm) ? $otm ? ' class="printlayout otm"' : ' cla
 		<section class="homeContainer">
 			<div id="cpl" class="show">
 				<h1>Custom Print Layout</h1>
-				<form action="" type="post">
+				<form action="upload.php" type="post" class="dropzoneABCD">
 					<input id="psize" type="text" name="psize" placeholder="8.5 x 11" list="papersize" />
 					<label for="psize" style="margin-bottom:40px;">Paper Size</label>
 					<datalist name="papersize" id="papersize">
