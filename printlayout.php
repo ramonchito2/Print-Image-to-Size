@@ -1,4 +1,7 @@
 <?php
+
+include('header.php');
+
 if( isset($_REQUEST['otm']) ): // OTM Print Layout
 	/**
 	Currently ids have to be manually copied form OTM
@@ -26,7 +29,7 @@ if( isset($_REQUEST['otm']) ): // OTM Print Layout
 	*/
 	// All terr IDs from OTM
 	$ids = [
-	"512372","512373","512374","512375","512376","512377","512378","512379","512380","512381","512382","512383","512384","512385","512386","512387","512388","512389","512390","512391","512392","512393","512394","512395","512396","512397","512398","512399","512400","512401","512402","512403","512404","512405","512406","512407","512408","512409","512410","512411","512412","512413","512414","512415","512416","512417","512418","512419","512420","512421","512422","512423","512424","512425","512426","512427","512428","512429"
+		"512372","512373","512374","520289","512376","512377","512378","512379","512380","512381","512382","512383","520279","512385","512386","512387","512388","512389","512390","512391","512392","512393","512394","512395","512396","512397","512398","512399","512400","520280","512402","512403","512404","512405","512406","512407","512408","512409","512410","512411","512412","512413","512414","512415","512416","512417","512418","512419","512420","512421","512422","512423","512424","512425","512426","512427","512428","512429"
 	];
 	// Remove '0' key from array. Needed for foreach loop logic
 	array_unshift($ids,"");
@@ -151,20 +154,35 @@ else: // Custom Print Layout
 				invalidsize = "<?= $invalidmsg; ?>";
 			</script>
 		<?php endif;
-	endif; ?>
+	endif;
 
-	<div class="page-body">
-		<div class="page-container">
-			<div class="page-inner"></div>
-			<span>Feature Currently Disabled</span>
-		</div>
-	</div>
+	// Get all images from imgs folder
+	if ($handle = opendir('imgs')): // Get all images from 'imgs' folder
+	    while (false !== ($entry = readdir($handle))):
+	        $files[] = $entry;
+	    endwhile;
+	    $images=preg_grep('/\.(jpg|jpeg|png|gif)(?:[\?\#].*)?$/i', $files);
+	    if( $images ):
+	    	$pg = 1;
+		    foreach($images as $image): // Output every image onto a single page
+		    	?>
+				<div class="page-body">
+					<div class="page-container">
+						<div class="page-inner"><img src="imgs/<?= $image; ?>" width="100%" height="auto"></div>
+						<span><?= sprintf("%02d", $pg);$pg++;?></span>
+					</div>
+				</div>
+		    	<?php
+		    endforeach;
+	    closedir($handle);
+	    endif;
+	endif;
 
-<?php endif; ?>
+endif; ?>
 
 <div class="menupanel">
 	<div class="menucontainer">
-		<?php $title = $otm ? 'Territories '.$submitted : 'Print Layout'; ?>
+		<?php $title = isset($otm) ? 'Territories '.$submitted : 'Print Layout'; ?>
 		<h2><?= $title; ?></h2>
 		<h3>Options</h3>
 		<input type="checkbox" name="borders" id="borders">
@@ -179,3 +197,6 @@ else: // Custom Print Layout
 </div>
 
 <a class="menu"></a>
+
+<?php
+include('footer.php');

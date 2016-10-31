@@ -446,7 +446,7 @@ body.otm a.startover:hover {
         padding: 0 !important;
     }
     .page-body {
-        margin-bottom: 0px;
+        margin-bottom: 20px;
         box-shadow: none;
         background: white;
     }
@@ -454,6 +454,9 @@ body.otm a.startover:hover {
         height: 9.4in !important;
     }
     .page-container > span {
+        display: none;
+    }
+    .menupanel {
         display: none;
     }
     a.menu {
