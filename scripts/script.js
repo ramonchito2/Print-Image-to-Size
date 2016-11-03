@@ -27,6 +27,12 @@ $(document).ready(function(){
 	        } else {
 	        	$('.page-container').removeClass('noborder');
 	        }
+	    } else if( $(this).attr('name') == 'inset' ) {
+	    	if( $(this).prop("checked") ){
+	    		$('body').addClass('borderinset');
+	    	} else {
+	    		$('body').removeClass('borderinset');
+	    	}
 	    } else if( $(this).attr('name') == 'pagenums' ) {
 	    	if( $(this).prop("checked") ){
 	    		$('.page-container > span').addClass('hide');

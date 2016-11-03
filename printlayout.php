@@ -182,11 +182,16 @@ endif; ?>
 
 <div class="menupanel">
 	<div class="menucontainer">
-		<?php $title = isset($otm) ? 'Territories '.$submitted : 'Print Layout'; ?>
+		<?php
+		if( $otm ): $title = 'Territories '.$submitted;
+		else: $title = 'Print Layout';
+		endif; ?>
 		<h2><?= $title; ?></h2>
 		<h3>Options</h3>
 		<input type="checkbox" name="borders" id="borders">
 		<label for="borders">Hide Borders</label><br>
+		<input type="checkbox" name="inset" id="inset">
+		<label for="inset">Inset Borders</label><br>
 		<input type="checkbox" name="pagenums" id="pagenums">
 		<label for="pagenums">Hide Page Numbers</label><br>
 		<input type="checkbox" name="campaign" id="campaign">
