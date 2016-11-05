@@ -1,8 +1,19 @@
 <?php
-
 include('header.php');
 
-if( isset($_REQUEST['otm']) ): // OTM Print Layout
+if( isset($_REQUEST['create'])  ): ?>
+	<header class="printlayout">
+		<img class="menu" src="./assets/icons/menu_white.png">
+		<a href="./"><h1>Create Territory Card Inserts</h1></a>
+	</header>
+<?php else: ?>
+	<header class="printlayout alt">
+	<img class="menu" src="./assets/icons/menu_white.png">
+	<a href="./"><h1>Print Territory Card Inserts</h1></a>
+	</header>
+<?php endif;
+
+if( isset($_REQUEST['create']) ): // OTM Print Layout
 	/**
 	Currently ids have to be manually copied form OTM
 	IDs dynamically change when territory is re-checkedout
@@ -36,7 +47,7 @@ if( isset($_REQUEST['otm']) ): // OTM Print Layout
 	unset($ids[0]);
 
 	// Requested terr numbers to display
-	$submitted = $_REQUEST['otm'];
+	$submitted = $_REQUEST['create'];
 
 	if( $submitted ):
 
@@ -83,78 +94,6 @@ if( isset($_REQUEST['otm']) ): // OTM Print Layout
 	<?php endif;
 
 else: // Custom Print Layout
-	$psize = $_REQUEST['psize'];
-	$csize = $_REQUEST['csize'];
-	if( $psize || $csize ):
-		$width;
-		$height;
-		$invalidsize;
-		$invalidmsg = '';
-		function convert_size($input) {
-			global $width, $height, $invalidsize;
-			$invalidsize = false;
-			// Remove unwanted characters and convert value into an array
-			$input = preg_replace('/[^\d\s\/x]/', '', $input);
-			$input = preg_split('/[\s]*x[\s]*/', $input);
-			// Validate proper value
-			if( empty($input[0]) ):
-				$invalidsize = true;
-				return;
-			endif;
-			// Convert width and height to decimal if necessary
-			foreach ($input as $n => $value):
-				$value = trim($value);
-				if (preg_match("/([\d]+) (([\d]+)\/([\d]+))/",$value,$matches)):
-				  	if ($matches[4]>0):
-				  	    $decimal = $matches[3] / $matches[4];
-				  	    if( !$n ): $width = $matches[1]+$decimal;
-				  	    else: $height = $matches[1]+$decimal;
-				  	    endif;
-			  	  	else:
-				  	    $invalidsize = true;
-			  	  	endif;
-
-				else:
-				  	$value = preg_replace('/[^\d]/', '', $value);
-				  	if( !$n ): $width = $value;
-				  	else: $height = $value;
-				  	endif;
-				endif;
-			endforeach;
-		}
-		
-		if( $psize ):
-			convert_size($psize);
-			if( !$invalidsize ): ?>
-				<style>
-				.page-body {
-					width: <?= $width; ?>in;
-					height: <?= $height; ?>in;
-				}
-				</style>
-			<?php else: $invalidmsg .= "<span>Your <b>Page Size</b> is invalid. The default width and height <b>8.5 x 11</b> are being used instead.</span>";
-			endif;
-		else: $invalidmsg .= "<span>Something's wrong with your <b>Page Size</b>. The default width and height <b>8.5 x 11</b> are being used instead.</span>";
-		endif;
-		if( $csize ):
-			convert_size($csize);
-			if( !$invalidsize ): ?>
-				<style>
-				.page-container {
-					width: <?= $width; ?>in;
-					height: <?= $height; ?>in;
-				}
-				</style>
-			<?php else: $invalidmsg .= "<span>Your <b>Print Size</b> is invalid. The default width and height <b>8 x 10</b> are being used instead.</span>";
-			endif;
-		else: $invalidmsg .= "<span>Something's wrong with your <b>Print Size</b>. The default width and height <b>8 x 10</b> are being used instead.</span>";
-		endif;
-		if( $invalidsize ): ?>
-			<script>
-				invalidsize = "<?= $invalidmsg; ?>";
-			</script>
-		<?php endif;
-	endif;
 
 	// Get all images from imgs folder
 	if ($handle = opendir('imgs')): // Get all images from 'imgs' folder
@@ -183,7 +122,7 @@ endif; ?>
 <div class="menupanel">
 	<div class="menucontainer">
 		<?php
-		if( $otm ): $title = 'Territories '.$submitted;
+		if( isset($create) ): $title = 'Territories '.$submitted;
 		else: $title = 'Print Layout';
 		endif; ?>
 		<h2><?= $title; ?></h2>

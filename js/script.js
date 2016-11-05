@@ -1,15 +1,12 @@
 $(document).ready(function(){
-	// Homepage form switch
-	$("#myonoffswitch").change(function() {
-	    if(this.checked) {
-	        $('#cpl').addClass('show');
-	        $('#otm').removeClass('show');
-	    } else {
-	        $('#cpl').removeClass('show');
-	        $('#otm').addClass('show');
-
-	    }
-	});
+	// Homepage card animation
+	$homeCard = $('.homeContainer .card');
+	$homeCard.click(function(){
+		if( $(this).hasClass('unfocus') ) {
+			$homeCard.addClass('unfocus');
+			$(this).removeClass('unfocus');
+		}
+	})
 	// Page Layout menu button, slideout and options
 	$('.menu').click(function(){
 	    $('.menupanel').addClass('open');

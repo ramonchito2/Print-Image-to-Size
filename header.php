@@ -10,11 +10,4 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
-<?php
-$psize  = isset( $_REQUEST['psize'] );
-$csize  = isset( $_REQUEST['csize'] );
-$otm    = isset( $_REQUEST['otm'] );
-$bstyle = ($psize || $csize || $otm) ? $otm ? ' class="printlayout otm"' : ' class="printlayout cpl"' : null;
-?>
-
-<body<?= $bstyle; ?>>
+<body>
