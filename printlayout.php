@@ -65,7 +65,7 @@ if( isset($_REQUEST['create']) ): // OTM Print Layout
 			$addLink = "https://onlineterritorymanager.com/PrintPrev8x10Spanish.php?MyTerID=".$id."&Sort=-1&First=1";
 			$mapLink = "https://onlineterritorymanager.com/MapIt.php?MyTerID=".$id."&Sort=-1";
 			?>
-			<div class="page-body mapcard">
+			<div class="page-body create">
 				<div class="page-container">
 					<div class="page-inner">
 						<iframe id="doc<?= $num; ?>" src="<?= $addLink; ?>" width="100%" height="100%" frameborder="0"></iframe>
@@ -74,7 +74,7 @@ if( isset($_REQUEST['create']) ): // OTM Print Layout
 					<div class="campaign-msg"></div>
 				</div>
 			</div>
-			<div class="page-body mapcard">
+			<div class="page-body create map">
 				<div class="page-container">
 					<div class="page-inner">
 						<iframe id="img<?= $num; ?>" src="<?= $mapLink; ?>" width="100%" height="100%" frameborder="0"></iframe>
@@ -122,20 +122,26 @@ endif; ?>
 <div class="menupanel">
 	<div class="menucontainer">
 		<?php
-		if( isset($create) ): $title = 'Territories '.$submitted;
-		else: $title = 'Print Layout';
+		if( isset($submitted) ): ?>
+			<h2>Showing territories '<?= $submitted; ?>'</h2>
+			<h3>Options</h3>
+			<input type="checkbox" name="pagenums" id="pagenums">
+			<label for="pagenums">Hide Page Numbers</label><br>
+		<?php
+		else: ?>
+			<h2>Card print layout</h2>
+			<h3>Options</h3>
+			<input type="checkbox" name="borders" id="borders">
+			<label for="borders">Hide Borders</label><br>
+			<input type="checkbox" name="inset" id="inset">
+			<label for="inset">Inset Borders</label><br>
+			<input type="checkbox" name="pagenums" id="pagenums">
+			<label for="pagenums">Hide Page Numbers</label><br>
+			<input type="checkbox" name="campaign" id="campaign">
+			<label for="campaign">Add Campaign Label?</label><br>
+			<input id="campaigntext" type="text" placeholder="Campana Enero 2016">
+		<?php
 		endif; ?>
-		<h2><?= $title; ?></h2>
-		<h3>Options</h3>
-		<input type="checkbox" name="borders" id="borders">
-		<label for="borders">Hide Borders</label><br>
-		<input type="checkbox" name="inset" id="inset">
-		<label for="inset">Inset Borders</label><br>
-		<input type="checkbox" name="pagenums" id="pagenums">
-		<label for="pagenums">Hide Page Numbers</label><br>
-		<input type="checkbox" name="campaign" id="campaign">
-		<label for="campaign">Add Campaign Label?</label><br>
-		<input id="campaigntext" type="text" placeholder="Campana Enero 2016">
 		<a href="." class="startover">Start Over</a>
 	</div>
 </div>

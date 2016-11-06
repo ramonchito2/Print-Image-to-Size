@@ -1,15 +1,23 @@
-$(document).ready(function(){
-	// Homepage form switch
-	$("#myonoffswitch").change(function() {
-	    if(this.checked) {
-	        $('#cpl').addClass('show');
-	        $('#otm').removeClass('show');
-	    } else {
-	        $('#cpl').removeClass('show');
-	        $('#otm').addClass('show');
-
-	    }
-	});
+jQuery(function($){
+	// Homepage card animation
+	$homeCard = $('.homeContainer .card');
+	$homeCard.click(function(){
+		if( $(this).hasClass('unfocus') ) {
+			$homeCard.addClass('unfocus');
+			$(this).removeClass('unfocus');
+		}
+	})
+	// Header shrinker
+	if ($(document).scrollTop() > 40){
+	  $('header').addClass('small');
+	}
+	$(document).scroll(function(){
+	  if ($(document).scrollTop() > 40){
+	    $('header').addClass('small');
+	  } else {
+	    $('header').removeClass('small');
+	  }
+	})
 	// Page Layout menu button, slideout and options
 	$('.menu').click(function(){
 	    $('.menupanel').addClass('open');
@@ -20,7 +28,7 @@ $(document).ready(function(){
 	$('.menucontainer').click(function(e){
 		e.stopPropagation();
 	})
-	$('body.printlayout input[type="checkbox"]').click(function(){
+	$('.menupanel input[type="checkbox"]').click(function(){
 	    if( $(this).attr('name') == 'borders' ){
 	        if( $(this).prop("checked") ){
 	        	$('.page-container').addClass('noborder');
@@ -63,3 +71,14 @@ $(document).ready(function(){
 	}
 
 })
+
+// Display uploaded files
+function onFileLoad(e) { 
+    $('body').append('<img src="'+e.target.result +'"/>');  
+}
+
+function displayPreview(files) {
+    var reader = new FileReader();
+    reader.onload = onFileLoad;
+    reader.readAsDataURL(files[0]);
+}

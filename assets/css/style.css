@@ -15,6 +15,23 @@ img {
 .hide {
     opacity: 0 !important;
 }
+.btn {
+    display: inline-block;
+    padding: 18px 40px;
+    max-width: 400px;
+    background: #2a4e92;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+}
+.btn:hover {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4);
+}
 
 header {
     padding: 16px;
@@ -34,6 +51,7 @@ header.printlayout {
     left: 0;
     right: 0;
     z-index: 1;
+    transition: padding 0.3s ease;
 }
 header.printlayout img {
     width: 40px;
@@ -53,6 +71,13 @@ header.printlayout a {
 }
 header.printlayout h1 {
     font-size: 1.6em;
+    transition: font-size 0.3s ease;
+}
+header.printlayout.small {
+    padding: 8px;
+}
+header.printlayout.small h1 {
+    font-size: 1.3em;
 }
 
 /**** Home page ***/
@@ -95,6 +120,7 @@ header.printlayout h1 {
 .homeContainer #print,
 .homeContainer #create {
     position: fixed;
+    text-align: center;
     top: 50%;
     left: 50%;
     width: 65vw;
@@ -154,31 +180,34 @@ header.printlayout h1 {
     font-weight: bold;
 }
 
-.homeContainer input[type="submit"] {
-    display: block;
+.homeContainer input.btn {
     margin: 40px auto 0;
-    padding: 18px 40px;
-    max-width: 400px;
-    background: #2a4e92;
-    border: none;
-    border-radius: 3px;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    display: block;
 }
 
-.homeContainer input[type="submit"]:hover {
-    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4);
-}
-
-.homeContainer #print input[type="submit"] {
+.homeContainer #print .btn {
     background: #f42828;
 }
 
 .homeContainer .card.unfocus input {
     pointer-events: none;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+}
+
+.fileUpload input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
 }
 
 /** Print Layout **/
@@ -197,26 +226,25 @@ header.printlayout h1 {
 header.printlayout + .page-body {
     margin-top: 112px;
 }
-body.create .page-body {
+.page-body.create {
     width: 8.5in;
     height: 11in;
 }
 .page-container {
     width: 8in;
     height: 10in;
-    border: 3px dashed #d4d4d4;
     margin: auto;
     padding: 5px;
     box-sizing: border-box;
     transition: all 0.2s ease;
 }
-body.create .page-container {
+.page-body.create .page-container {
     width: 7.1in;
     height: 9.9in;
 }
 
-.page-container.noborder {
-    border-width: 0px;
+body.cropmarks .page-container {
+    border: 3px dashed #d4d4d4;
 }
 
 body.printlayout.borderinset .page-container {
@@ -268,8 +296,9 @@ body.printlayout.borderinset .page-container:after {
     transition: 0.3s ease;
 }
 
-body .page-body.mapcard:nth-child(odd) .page-container {
-    height: 9.35in;
+.page-body.map .page-container {
+    height: 10.2in;
+    width: 7.2in;
 }
 
 .menupanel {
@@ -404,16 +433,17 @@ body.create a.startover:hover {
     body {
         margin: 0 !important;
         padding: 0 !important;
+        background: white;
     }
     header {
         display: none;
     }
     .page-body {
-        margin-bottom: 0px;
+        margin: 0px auto !important;
         box-shadow: none;
         background: white;
     }
-    body.create .mapcard .page-container {
+    body.create .page-container {
         height: 9.4in !important;
     }
     .page-container > span {
