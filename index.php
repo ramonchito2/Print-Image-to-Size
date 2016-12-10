@@ -1,33 +1,15 @@
 <?php
-include('header.php'); ?>
+include('header.php');
 
-	<header>
-		<h1>Territory Card Inserts</h1>
-	</header>
+$create = isset($_REQUEST['create']) && $_REQUEST['create'];
+$print = isset($_REQUEST['print']) && $_REQUEST['print'];
 
-	<section class="homeContainer">
-		<div id="create" class="card show">
-			<h2>Create Inserts</h1>
-			<h3>( Make sure you are signed into your OTM account first )</h3>
-			<form action="printlayout.php" type="post">
-				<input type="text" name="create" placeholder="e.g: 1-10,15,19,20-24"/>
-				<input class="btn" type="submit" value="Get Territories" />
-			</form>
-		</div>
+if( !$create && !$print ) {
+	include('home.php');
+} else {
+	include('printlayout.php');
+}
 
-		<div id="print" class="card unfocus">
-			<h2>Print Inserts</h1>
-			<h3>Upload already completed territories below.</h3>
-			<form action="upload.php" type="post" class="">
-				<div class="fileUpload btn btn-primary">
-				    <span>Upload File(s)</span>
-				    <input name="file" type="file" class="upload" multiple onchange="displayPreview(this.files)" />
-				</div>
-			</form>
-		</div>
-	</section>
-
-<?php
 include('footer.php');
 
 

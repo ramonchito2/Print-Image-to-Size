@@ -1,43 +1,11 @@
 <?php
-include('header.php');
-
-if( isset($_REQUEST['create'])  ): ?>
-	<header class="printlayout">
-		<img class="menu" src="./assets/icons/menu_white.png">
-		<a href="./"><h1>Create Territory Card Inserts</h1></a>
-	</header>
-<?php else: ?>
-	<header class="printlayout alt">
-	<img class="menu" src="./assets/icons/menu_white.png">
-	<a href="./"><h1>Print Territory Card Inserts</h1></a>
-	</header>
-<?php endif;
-
 if( isset($_REQUEST['create']) ): // OTM Print Layout
 	/**
 	Currently ids have to be manually copied form OTM
 	IDs dynamically change when territory is re-checkedout
-	Easy JS way to get all ids of terrs (won't work as bookmarklet)
-	copy and run following script in a browser's Dev Tools
-	(make sure to turn admin options on and order by name)
-	---
-	terrs = $('tr > td:nth-child(3)');
-	ids = [];
-	terrs.each(function(){
-	    link = $(this).siblings('td').find('a[href^="PrintPrev8x10Spanish"]').attr('href');
-	    id = link.match(/MyTerID=([0-9]*)&/)[1];
-	    ids.push(id);
-	})
-	$('body').append('<div class="idscopied">IDs Copied!</div><style>.idscopied{position:fixed;top:45%;left:50%;z-index:99999999;background:rgba(27, 134, 27, 0.94);border:1px solid green;font-size:1.8em;color:white;padding:3px 24px;border-radius:4px;opacity:0;transform:translate(-50%,-50%);transition:all .3s ease}.idscopied.enter{top:50%;opacity:1}</style>');
-	// Autosave message
-	$('.idscopied').css('opacity');
-	$('.idscopied').addClass('enter');
-	setTimeout(function(){
-		$('.idscopied').removeClass('enter');
-	},2000 );
-	copy(ids); // actually copies var into clipboard
-	---
+	Easy JS way to get all ids of terrs is to use the bookmarklet
 	*/
+	
 	// All terr IDs from OTM
 	$ids = [
 		"512372","512373","512374","520289","512376","512377","512378","512379","512380","512381","512382","512383","520279","512385","512386","512387","512388","512389","512390","512391","512392","512393","512394","512395","512396","512397","512398","512399","512400","520280","512402","512403","512404","512405","512406","512407","512408","512409","512410","512411","512412","512413","512414","512415","512416","512417","512418","512419","512420","512421","512422","512423","512424","512425","512426","512427","512428","512429"
@@ -93,60 +61,19 @@ if( isset($_REQUEST['create']) ): // OTM Print Layout
 
 	<?php endif;
 
-else: // Custom Print Layout
+endif;
 
-	// Get all images from imgs folder
-	if ($handle = opendir('imgs')): // Get all images from 'imgs' folder
-	    while (false !== ($entry = readdir($handle))):
-	        $files[] = $entry;
-	    endwhile;
-	    $images=preg_grep('/\.(jpg|jpeg|png|gif)(?:[\?\#].*)?$/i', $files);
-	    if( $images ):
-	    	$pg = 1;
-		    foreach($images as $image): // Output every image onto a single page
-		    	?>
-				<div class="page-body">
-					<div class="page-container">
-						<div class="page-inner"><img src="imgs/<?= $image; ?>" width="100%" height="auto"></div>
-						<span><?= sprintf("%02d", $pg);$pg++;?></span>
-					</div>
-				</div>
-		    	<?php
-		    endforeach;
-	    closedir($handle);
-	    endif;
-	endif;
+if( isset($_REQUEST['print']) ):  // Custom Print Layout
 
-endif; ?>
+	var_dump($_REQUEST['print']);
 
-<div class="menupanel">
-	<div class="menucontainer">
-		<?php
-		if( isset($submitted) ): ?>
-			<h2>Showing territories '<?= $submitted; ?>'</h2>
-			<h3>Options</h3>
-			<input type="checkbox" name="pagenums" id="pagenums">
-			<label for="pagenums">Hide Page Numbers</label><br>
-		<?php
-		else: ?>
-			<h2>Card print layout</h2>
-			<h3>Options</h3>
-			<input type="checkbox" name="borders" id="borders">
-			<label for="borders">Hide Borders</label><br>
-			<input type="checkbox" name="inset" id="inset">
-			<label for="inset">Inset Borders</label><br>
-			<input type="checkbox" name="pagenums" id="pagenums">
-			<label for="pagenums">Hide Page Numbers</label><br>
-			<input type="checkbox" name="campaign" id="campaign">
-			<label for="campaign">Add Campaign Label?</label><br>
-			<input id="campaigntext" type="text" placeholder="Campana Enero 2016">
-		<?php
-		endif; ?>
-		<a href="." class="startover">Start Over</a>
+	// Display uploaded images
+	?>
+	<div class="page-body">
+		<div class="page-container">
+			<span>01</span>
+		</div>
 	</div>
-</div>
-
-<a class="menu"></a>
 
 <?php
-include('footer.php');
+endif;

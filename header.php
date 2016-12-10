@@ -11,3 +11,21 @@
 </head>
 
 <body>
+
+<?php
+if( isset($_REQUEST['print']) ):
+	$hclass = ' class="alt"';
+	$ccard = ' unfocus';
+	$pcard = '';
+else:
+	$hclass = '';
+	$ccard = '';
+	$pcard = ' unfocus';
+endif; ?>
+
+<header<?= $hclass; ?>>
+	<div>
+		<img id="menu" src="./assets/icons/menu_white.png">
+		<a href="./"><h1>Territory Card Inserts</h1></a>	
+	</div>
+</header>
