@@ -7,7 +7,7 @@ include('header.php');
 	else: ?>
 
 		<section class="homeContainer">
-			<div id="cpl" class="show">
+			<div id="cpl">
 				<h1>Custom Print Layout</h1>
 				<!-- <form action="upload.php" type="post" class="dropzoneABCD"> -->
 				<form action="printlayout.php" type="post">
@@ -41,7 +41,7 @@ include('header.php');
 				</form>
 			</div>
 
-			<div id="otm">
+			<div id="otm" class="show">
 				<h1>Which Territories?</h1>
 				<form action="printlayout.php" type="post">
 					<h3 style="text-align: center;">Input OTM territories you want to print<span>( Make sure you are signed into your account first )</h3>
@@ -50,13 +50,13 @@ include('header.php');
 				</form>
 			</div>
 
-			<div class="onoffswitch">
+			<!-- <div class="onoffswitch">
 			    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked />
 			    <label class="onoffswitch-label" for="myonoffswitch">
 			        <span class="onoffswitch-inner"></span>
 			        <span class="onoffswitch-switch"></span>
 			    </label>
-			</div>
+			</div> -->
 		</section>
 
 	<?php endif;
