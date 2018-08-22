@@ -10,6 +10,15 @@ $(document).ready(function(){
 
 	    }
 	});
+	$('.updateLinks').click(function(){
+		$('.updateids').removeClass('hidden');
+		$('.which').addClass('hidden');
+	});
+	$('.printTerrs').click(function(){
+		$('.updateids').addClass('hidden');
+		$('.which').removeClass('hidden');
+	});
+
 	// Page Layout menu button, slideout and options
 	$('.menu').click(function(){
 	    $('.menupanel').addClass('open');

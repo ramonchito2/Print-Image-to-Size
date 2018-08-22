@@ -84,6 +84,22 @@ img {
     color: #808080;
 }
 
+.homeContainer #otm > div {
+    min-width: 400px;
+}
+
+.homeContainer .hidden {
+    display: none;
+}
+
+.homeContainer a.updateLInks,
+.homeContainer a.printTerrs {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
 .homeContainer input[type="text"] {
     padding: 4px 10px;
     background: transparent;

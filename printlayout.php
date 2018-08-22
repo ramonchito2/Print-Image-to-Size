@@ -27,10 +27,21 @@ if( isset($_REQUEST['otm']) ): // OTM Print Layout
 	copy(ids); // actually copies var into clipboard
 	---
 	*/
-	// All terr IDs from OTM
-	$ids = [
-		"641276","641277","641278","641279","641280","641281","641282","641283","641284","641285","641286","641287","641288","641289","641290","641291","641292","641293","641294","641295","641296","641297","641298","641299","641300","641301","641302","641303","641304","641305","641306","641307","641308","641309","641310","641311","641312","641313","641318","641319","641320","641321","641322","641323","641324","641325","641326","641327","641328","641329","641330","641331","641332","641333","641334","641335","641336","641338","641339","641340"
-	];
+	// Get Terr IDs from DB
+	@require_once('../wp-config.php');
+	$conn = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+	if (!$conn):
+	    die("Connection failed: " . mysqli_connect_error());
+	endif;
+	$sql = "SELECT * FROM print_ids";
+	$result = mysqli_query($conn, $sql);
+	if (mysqli_num_rows($result) > 0):
+	    while($row = mysqli_fetch_assoc($result)):
+	        $printids = $row['ids'];
+	    endwhile;
+	endif;
+	
+	$ids = explode(',', $printids);
 	// Remove '0' key from array. Needed for foreach loop logic
 	array_unshift($ids,"");
 	unset($ids[0]);

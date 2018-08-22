@@ -14,6 +14,7 @@
 $psize  = isset( $_REQUEST['psize'] );
 $csize  = isset( $_REQUEST['csize'] );
 $otm    = isset( $_REQUEST['otm'] );
+$newids = isset( $_REQUEST['newids'] ) ? $_REQUEST['newids'] : null;
 $bstyle = ($psize || $csize || $otm) ? $otm ? ' class="printlayout otm"' : ' class="printlayout cpl"' : null;
 ?>
 
